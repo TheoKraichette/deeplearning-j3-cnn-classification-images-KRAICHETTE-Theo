@@ -35,10 +35,10 @@ Environnement défini dans `Dockerfile` / `docker-compose.yml` (TensorFlow CPU +
 
 ## Résultats
 
-À compléter après entraînement.
+Tâche volontairement difficile (les motifs bactérien et viral se recouvrent), d'où une progression réelle mais modeste. L'intérêt est le rapport performance/coût : MobileNetV2 gagne avec presque deux fois moins de paramètres et un modèle deux fois plus léger.
 
 | Itération | val_accuracy | Params | Temps | Taille |
 |-----------|-------------|--------|-------|--------|
-| CNN scratch | – | – | – | – |
-| CNN augmenté + Dropout | – | – | – | – |
-| MobileNetV2 fine-tuning | – | – | – | – |
+| CNN scratch | 73,5 % | 4 287 809 | 239 s | 49,1 Mo |
+| CNN augmenté + Dropout | 74,7 % | 4 287 809 | 628 s | 49,1 Mo |
+| MobileNetV2 (tête + fine-tuning) | 77,4 % | 2 422 081 | 1206 s | 23,4 Mo |
