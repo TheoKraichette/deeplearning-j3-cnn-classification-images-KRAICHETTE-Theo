@@ -35,10 +35,12 @@ Environnement défini dans `Dockerfile` / `docker-compose.yml` (TensorFlow CPU +
 
 ## Résultats
 
-Tâche volontairement difficile (les motifs bactérien et viral se recouvrent), d'où une progression réelle mais modeste. L'intérêt est le rapport performance/coût : MobileNetV2 gagne avec presque deux fois moins de paramètres et un modèle deux fois plus léger.
+Tâche volontairement difficile (les motifs bactérien et viral se recouvrent), d'où une progression réelle mais modeste en validation. L'intérêt est le rapport performance/coût : MobileNetV2 fait aussi bien que le CNN from scratch avec presque deux fois moins de paramètres et un modèle deux fois plus léger.
 
-| Itération | val_accuracy | Params | Temps | Taille |
-|-----------|-------------|--------|-------|--------|
-| CNN scratch | 73,5 % | 4 287 809 | 239 s | 49,1 Mo |
-| CNN augmenté + Dropout | 74,7 % | 4 287 809 | 628 s | 49,1 Mo |
-| MobileNetV2 (tête + fine-tuning) | 77,4 % | 2 422 081 | 1206 s | 23,4 Mo |
+| Itération | val_accuracy | test (patient-disjoint) | Params | Temps | Taille |
+|-----------|-------------|------------------------|--------|-------|--------|
+| CNN scratch | 73,5 % | 85,9 % | 4 287 809 | 239 s | 49,1 Mo |
+| CNN augmenté + Dropout | 74,7 % | 90,0 % | 4 287 809 | 628 s | 49,1 Mo |
+| MobileNetV2 (tête + fine-tuning) | 77,4 % | 86,9 % | 2 422 081 | 1206 s | 23,4 Mo |
+
+Le test set officiel (patient-disjoint), gardé intact jusqu'à l'évaluation finale, se révèle plus facile que le split de validation : les trois modèles y gagnent 11 à 15 points. Le classement s'y inverse — le CNN augmenté atteint 90,0 %, devant MobileNetV2 (86,9 %). L'augmentation apporte une robustesse qui paie sur des données réellement inédites. Les écarts (86-90 %) restent dans la marge d'erreur d'un test set de 390 images.
