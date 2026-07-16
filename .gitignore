@@ -1,0 +1,14 @@
+# Jupyter / Python
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# Secrets
+.env
+kaggle.json
+
+# Données & logs volumineux (volumes Docker / régénérés)
+data/
+raw/
+logs/
+*.zip

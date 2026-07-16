@@ -1,0 +1,19 @@
+services:
+  notebook:
+    build: .
+    image: j3-pneumonia
+    ports:
+      - "8888:8888"   # Jupyter
+      - "6006:6006"   # TensorBoard
+    env_file:
+      - .env          # KAGGLE_USERNAME / KAGGLE_KEY
+    volumes:
+      - ./:/tf/work           # projet : notebook, courbes, modeles (persiste sur Windows)
+      - raw_data:/tf/raw       # dataset brut (volume Docker, rapide)
+      - dataset:/tf/data       # dataset reorganise train/val
+    working_dir: /tf/work
+    command: bash -c "jupyter notebook --notebook-dir=/tf/work --ip=0.0.0.0 --port=8888 --no-browser --allow-root"
+
+volumes:
+  raw_data:
+  dataset:
