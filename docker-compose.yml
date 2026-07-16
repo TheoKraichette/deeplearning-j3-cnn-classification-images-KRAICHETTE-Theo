@@ -12,7 +12,7 @@ services:
       - raw_data:/tf/raw       # dataset brut (volume Docker, rapide)
       - dataset:/tf/data       # dataset reorganise train/val
     working_dir: /tf/work
-    command: bash -c "jupyter notebook --notebook-dir=/tf/work --ip=0.0.0.0 --port=8888 --no-browser --allow-root --IdentityProvider.token=''"
+    command: bash -c "tensorboard --logdir /tf/work/logs --host 0.0.0.0 --port 6006 & jupyter notebook --notebook-dir=/tf/work --ip=0.0.0.0 --port=8888 --no-browser --allow-root --IdentityProvider.token=''"
 
 volumes:
   raw_data:
