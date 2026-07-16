@@ -1,4 +1,4 @@
-# CNN — Radiographie thoracique : normal vs pneumonie
+# CNN — Pneumonie bactérienne vs virale (radiographie thoracique)
 
 Classification binaire d'images en trois itérations, sur le même problème, pour mesurer l'apport de chaque technique de régularisation et du transfer learning.
 
@@ -12,11 +12,11 @@ Modèle éducatif : il ne constitue en aucun cas un outil de diagnostic médical
 
 ## Dataset
 
-Radiographies thoraciques labellisées NORMAL / PNEUMONIA (~5 900 images), dataset Kaggle `paultimothymooney/chest-xray-pneumonia`.
+Radiographies de pneumonie labellisées bactérienne / virale (~3 900 images), issues du dataset Kaggle `paultimothymooney/chest-xray-pneumonia`. On écarte les clichés `normal` et on ne garde que les cas pathologiques : distinguer l'origine de l'infection est une tâche fine bien plus difficile que « normal vs pneumonie » (les deux motifs radiologiques se recouvrent largement). Le type d'infection n'est pas dans un dossier mais encodé dans le nom de fichier (`personXX_bacteria_YY.jpeg`), sur lequel le tri s'appuie.
 
 Le notebook nettoie l'archive (dossiers `__MACOSX`, copie imbriquée) puis organise en `train` / `val` / `test`. Le `test` officiel (patient-disjoint) est conservé pour l'évaluation finale ; le `val` officiel ne faisant que 16 images, `train` et `val` sont refaits par un split 80/20 (`seed=42`) sur le reste.
 
-Les classes sont déséquilibrées (~2,7:1 en faveur de pneumonie). Le déséquilibre est traité avec `class_weight` à l'entraînement (pas en jetant des données), et l'analyse regarde des métriques adaptées, pas seulement l'accuracy brute.
+Les classes sont déséquilibrées (~1,9:1 en faveur du bactérien). Le déséquilibre est traité avec `class_weight` à l'entraînement (pas en jetant des données), et l'analyse regarde des métriques adaptées, pas seulement l'accuracy brute.
 
 ## Reproduire
 
